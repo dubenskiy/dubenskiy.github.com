@@ -101,7 +101,7 @@ angular.module('storeApp', []).controller('storeController', function ($scope, $
         $scope.baskets = [];
         $scope.name = null;
         $scope.price = null;
-        $scope.discountIntegerAll = null;
+        $scope.discountIntegerAll = 0;
         alert("Скидка применилась!");
     };
 
