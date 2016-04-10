@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru" ng-app="storeApp" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Магазин</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+</head>
+
+<body>
+<div class="container" ng-controller="storeController">
+    <div class="jumbotron">
+        <div>
+            <h3>Добавить продукт</h3>
+            <form class="form-inline" autocomplete="off" name="storeForm" novalidate>
+                <div class="form-group">
+                    <label>Продукт</label>
+                    <input class="form-control" placeholder="Продукт" ng-model="name" required>
+                </div>
+                <div class="form-group">
+                    <label>Цена</label>
+                    <input class="form-control" placeholder="Цена" ng-model="price" required>
+                </div>
+                <button class="btn btn-default" ng-click="addItem(name, price)" ng-disabled="storeForm.$invalid">Добавить</button>
+            </form>
+        </div>
+        <hr>
+        <div ng-init="discountIntegerAll=0">
+            <h3>Корзина</h3>
+            <table class="table table-bordered table-hover" style="background-color: white">
+                <thead>
+                <tr>
+                    <th>Продукт</th>
+                    <th>Цена</th>
+                    <th>Цена со скидкой</th>
+                    <!--<th>остаток</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="val in baskets track by $index">
+                    <td ng-bind="::val.name"></td>
+                    <td ng-bind="::val.price"></td>
+                    <td ng-bind="(val.priceInteger-val.discountPriceInteger)"></td>
+                    <!--<td ng-bind="::val.discountRemainder"></td>-->
+                </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-8">
+                    <p>Применить скидку <strong ng-bind="discountIntegerAll"></strong> рублей</p>
+                    <!--<p>остаток {{discountRemainderAll}}</p>-->
+                </div>
+                <div class="col-xs-6 col-md-4">
+                    <button class="btn btn-default" ng-disabled="!baskets.length>0" ng-click="apply()">Применить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+
+<script src="script.js"></script>
+</body>
+</html>
