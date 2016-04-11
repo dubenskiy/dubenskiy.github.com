@@ -27,7 +27,7 @@ angular.module('storeApp', []).controller('storeController', function ($scope, $
      */
     $scope.addItem = function (name, price) {
 
-        if ($scope.check(price, $scope.baskets)) {
+        if ($scope.check(price, $scope.baskets, 'price')) {
 
             $scope.baskets.push({
                 name: name,
@@ -73,14 +73,14 @@ angular.module('storeApp', []).controller('storeController', function ($scope, $
      * @param arr
      * @returns {boolean}
      */
-    $scope.check = function (val, arr) {
+    $scope.check = function (val, arr, str) {
         if (isNaN(val)) {
             alert('Цена должна быть числом');
             return false;
         } else {
             if (arr.length > 0) {
                 for (var i = 0; i < arr.length; i++) {
-                    if (arr[i].price == val) {
+                    if (arr[i][str] == val) {
                         alert('Цена не должна повторяться!');
                         return false;
                     } else {
